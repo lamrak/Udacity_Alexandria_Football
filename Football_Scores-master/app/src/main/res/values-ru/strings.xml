@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_settings">Настройки</string>
+    <string name="today">Сегодня</string>
+    <string name="yesterday">Вчера</string>
+    <string name="tomorrow">Завтра</string>
+    <string name="champions_league">УЕФА Лига Чемпионов</string>
+    <string name="bundesliga">Бундеслига</string>
+    <string name="premierleague">Премьер Лига</string>
+    <string name="primeradivison">Примера</string>
+    <string name="seriaa">Серия А</string>
+    <string name="matchday_text">День матча</string>
+    <string name="group_stage_text">Груповой этап</string>
+    <string name="first_knockout_round">Первый раун</string>
+    <string name="quarter_final">Четверть финал</string>
+    <string name="semi_final">Полуфинал</string>
+    <string name="final_text">Финал</string>
+    <string name="share_text">Поделиться</string>
+    <string name="about">О приложении</string>
+
+    <string name="home_team_crest">Герб команды хозяева поля</string>
+    <string name="away_team_crest">Герб гостевой команды</string>
+    <string name="share_button">Нажмите, чтобы поделиться матчем</string>
+    <string name="not_to_know_league">Лига неизвестна</string>
+    <string name="title_widget_match">Футбольные счета</string>
+    <string name="empty_forecast_list">Сегодня нет матчей</string>
+
+    <string name="no_internet_connection">Доступ по интернет ограничен</string>
+    <string name="error_fetching_data">Произошла ошибка во время получения данных</string>
+    <string name="error_reading_data">Ошибка чтения данных</string>
+    <string name="error_parsing_data">Ошибка парсинга данных</string>
+    <string name="error_server_connect">Не могу соедениться с сервером</string>
+
+</resources>

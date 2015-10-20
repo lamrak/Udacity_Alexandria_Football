@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Александрия</string>
+
+    <!-- Menu Items -->
+    <string name="books">Список книг</string>
+    <string name="scan">Сканировать/добавить книгу</string>
+    <string name="about">О приложении</string>
+
+    <string name="navigation_drawer_open" >Открыть навигацию</string>
+    <string name="navigation_drawer_close">Закрыть навигацию</string>
+    <string name="action_settings">Настройки</string>
+    <string name="scan_button">Сканировать</string>
+    <string name="input_hint">Введите ISBN-13. Только цифры</string>
+    <string name="book_cover">Обложка книги</string>
+
+    <string name="ok_button">Следующая</string>
+    <string name="cancel_button">Отменить</string>
+    <string name="not_found">Книга не найдена</string>
+    <string name="search">Искать</string>
+    <string name="delete">Удалить книгу</string>
+    <string name="pref_startScreen">Выбрать Startscreen</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="action_share">Поделиться</string>
+    <string name="back_button">Вернуться</string>
+    <string name="share_text">Обязательно к прочтению:</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="title_activity_scanner">Сканнер</string>
+    <string name="book_found">Книга найдена</string>
+    <string name="no_internet_connection">Доступ по интернет ограничен</string>
+    <string name="error_fetching_data">Произошла ошибка во время получения данных</string>
+    <string name="error_reading_data">Ошибка чтения данных</string>
+    <string name="error_input_digits">Это не код ISBN-13</string>
+</resources>
