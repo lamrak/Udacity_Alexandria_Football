@@ -16,7 +16,7 @@
 
     <string name="ok_button">Next</string>
     <string name="cancel_button">Cancel</string>
-    <string name="not_found">No Book found</string>
+    <string name="not_found">No Book found. Check if ISBN is correct.</string>
     <string name="search">Search</string>
     <string name="delete">Delete Book</string>
     <string name="pref_startScreen">Select Startscreen</string>
@@ -34,4 +34,5 @@
     <string name="error_fetching_data">Fetching data error</string>
     <string name="error_reading_data">Error reading data</string>
     <string name="error_input_digits">Not ISBN-13.</string>
+    <string name="no_information">is not available</string>
 </resources>

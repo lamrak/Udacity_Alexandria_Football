@@ -55,6 +55,10 @@ public class ScannerActivity extends Activity implements ZBarScannerView.ResultH
             ean="978"+ean;
         }
 
+        if(ean.startsWith("918")){
+            ean="978"+ean.substring(3);
+        }
+
 //        if (ean.endsWith("X") || ean.endsWith("x"))
 //            ean = ean.substring(0, ean.length() - 1) + "1";
 
@@ -65,7 +69,8 @@ public class ScannerActivity extends Activity implements ZBarScannerView.ResultH
             return;
         }
 
-        setResult(RESULT_OK);
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent.putExtra(AddBook.EAN_CODE, ean));
 
         Intent bookIntent = new Intent(this, BookService.class);
         bookIntent.putExtra(BookService.EAN, ean);

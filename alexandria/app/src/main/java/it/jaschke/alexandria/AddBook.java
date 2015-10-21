@@ -1,7 +1,6 @@
 package it.jaschke.alexandria;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -27,6 +27,7 @@ import it.jaschke.alexandria.services.DownloadImage;
 public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final String TAG = "INTENT_TO_SCAN_ACTIVITY";
     private static final int BARCODE_RESULT = 102;
+    public static final String EAN_CODE = "ean";
     private EditText ean;
     private final int LOADER_ID = 1;
     private View rootView;
@@ -72,6 +73,11 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
                 if(ean.length()==10 && !ean.startsWith("978")){
                     ean="978"+ean;
                 }
+
+                if(ean.startsWith("918")){
+                    ean="978"+ean.substring(3);
+                }
+
                 if(ean.length()<13){
                     clearFields();
                     return;
@@ -88,19 +94,6 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         rootView.findViewById(R.id.scan_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // This is the callback method that the system will invoke when your button is
-                // clicked. You might do this by launching another app or by including the
-                //functionality directly in this app.
-                // Hint: Use a Try/Catch block to handle the Intent dispatch gracefully, if you
-                // are using an external app.
-                //when you're done, remove the toast below.
-                Context context = getActivity();
-                CharSequence text = "This button should let you scan a book for its barcode!";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
                 startActivityForResult(new Intent(getActivity(), ScannerActivity.class), BARCODE_RESULT);
             }
         });
@@ -138,8 +131,13 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         if (requestCode == BARCODE_RESULT) {
             // Make sure if the request was successful
             if (resultCode == getActivity().RESULT_OK) {
-                if (Utils.isNetworkAvailable(getActivity()))
-                    Toast.makeText(getActivity(), R.string.book_found, Toast.LENGTH_LONG).show();
+                if (!Utils.isNetworkAvailable(getActivity()))
+                    Toast.makeText(getActivity(), R.string.no_internet_connection, Toast.LENGTH_LONG).show();
+
+                Bundle res = data.getExtras();
+                String result = res.getString(EAN_CODE);
+                if (!TextUtils.isEmpty(result))
+                    ean.setText(result);
             }
         }
     }
@@ -173,18 +171,18 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
             return;
         }
 
-        String bookTitle = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.TITLE));
+        String bookTitle = Utils.readStringDataFromCursor(getActivity(), data, AlexandriaContract.BookEntry.TITLE);
         ((TextView) rootView.findViewById(R.id.bookTitle)).setText(bookTitle);
 
-        String bookSubTitle = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE));
+        String bookSubTitle = Utils.readStringDataFromCursor(getActivity(), data, AlexandriaContract.BookEntry.SUBTITLE);
         ((TextView) rootView.findViewById(R.id.bookSubTitle)).setText(bookSubTitle);
 
-        String authors = data.getString(data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
+        String authors = Utils.readStringDataFromCursor(getActivity(), data, AlexandriaContract.AuthorEntry.AUTHOR);
         String[] authorsArr = authors.split(",");
         ((TextView) rootView.findViewById(R.id.authors)).setLines(authorsArr.length);
         ((TextView) rootView.findViewById(R.id.authors)).setText(authors.replace(",","\n"));
         String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
-        if(Patterns.WEB_URL.matcher(imgUrl).matches()){
+        if(imgUrl != null && Patterns.WEB_URL.matcher(imgUrl).matches()){
             new DownloadImage((ImageView) rootView.findViewById(R.id.bookCover)).execute(imgUrl);
             rootView.findViewById(R.id.bookCover).setVisibility(View.VISIBLE);
         }

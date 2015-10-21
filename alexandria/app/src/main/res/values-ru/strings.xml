@@ -16,7 +16,7 @@
 
     <string name="ok_button">Следующая</string>
     <string name="cancel_button">Отменить</string>
-    <string name="not_found">Книга не найдена</string>
+    <string name="not_found">Книга не найдена. Проверьте ISBN код.</string>
     <string name="search">Искать</string>
     <string name="delete">Удалить книгу</string>
     <string name="pref_startScreen">Выбрать Startscreen</string>
@@ -32,4 +32,5 @@
     <string name="error_fetching_data">Произошла ошибка во время получения данных</string>
     <string name="error_reading_data">Ошибка чтения данных</string>
     <string name="error_input_digits">Это не код ISBN-13</string>
+    <string name="no_information">Данные не доступны</string>
 </resources>
