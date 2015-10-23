@@ -22,8 +22,8 @@ public class Utils {
     }
 
     public static String readStringDataFromCursor(Context context, Cursor data, String columnProjection) {
-        String value = data.getString(data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
+        String value = data.getString(data.getColumnIndex(columnProjection));
 
-        return null != value ? value : context.getString(R.string.no_information);
+        return null != value ? value : "";
     }
 }
